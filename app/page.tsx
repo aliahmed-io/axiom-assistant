@@ -140,10 +140,9 @@ export default function Chat() {
                               }`}
                             >
                               <ReactMarkdown
-                                children={message.content}
                                 remarkPlugins={[remarkGfm]}
                                 components={{
-                                  code({ node, inline, className, children, ...props }) {
+                                  code({ inline, children, ...props }) {
                                     return inline ? (
                                       <code {...props} className="bg-gray-200 px-1 rounded">{children}</code>
                                     ) : (
@@ -160,8 +159,10 @@ export default function Chat() {
                                   ol: ({ children }) => (
                                     <li className="list-decimal ml-4">{children}</li>
                                   ),
-                                }}                     
-                              />
+                                }}
+                              >
+                                {message.content}
+                              </ReactMarkdown>
                             </div>
                           </div>
                         ))}
