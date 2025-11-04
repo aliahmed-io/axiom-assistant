@@ -1,7 +1,9 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import { Menu } from "lucide-react";
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
 
 const Header = () => {
   return (
@@ -9,7 +11,7 @@ const Header = () => {
       <div className="container flex h-14 items-center justify-between">
         <div className="mr-4 hidden md:flex">
           <Link className="mr-6 flex items-center space-x-2" href="/">
-            <span className="hidden font-bold sm:inline-block">NoteWorthy</span>
+            <span className="hidden font-bold sm:inline-block">Axion Assistant</span>
           </Link>
           <nav className="flex items-center space-x-6 text-sm font-medium">
             <Link href="#features">Features</Link>
@@ -23,12 +25,17 @@ const Header = () => {
         </button>
         <div className="flex items-center space-x-2">
           <nav className="flex items-center">
-            <Button variant="ghost" asChild>
-              <Link href="/login">Log in</Link>
-            </Button>
-            <Button asChild>
-              <Link href="/signup">Sign up</Link>
-            </Button>
+            <SignedOut>
+              <SignInButton mode="modal">
+                <Button variant="ghost">Log in</Button>
+              </SignInButton>
+              <SignUpButton mode="modal">
+                <Button>Sign up</Button>
+              </SignUpButton>
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
           </nav>
         </div>
       </div>
