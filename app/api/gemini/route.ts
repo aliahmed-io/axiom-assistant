@@ -4,7 +4,6 @@ import { initialMessage } from "@/lib/data";
 
 const google = createGoogleGenerativeAI({ //initialize Google Generative AI client
   apiKey: process.env.GOOGLE_API_KEY || "",
-  apiVersion: "v1",
 });
 
 export const runtime = "edge"; //specify edge runtime for serverless deployment (web-standard apis)
