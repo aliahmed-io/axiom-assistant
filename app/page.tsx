@@ -142,12 +142,14 @@ export default function Chat() {
                               <ReactMarkdown
                                 remarkPlugins={[remarkGfm]}
                                 components={{
-                                  code({ inline, children, ...props }) {
-                                    return inline ? (
-                                      <code {...props} className="bg-gray-200 px-1 rounded">{children}</code>
+                                  code(props: any) {
+                                    const { children, className, ...rest } = props;
+                                    const isInline = !className;
+                                    return isInline ? (
+                                      <code {...rest} className="bg-gray-200 px-1 rounded">{children}</code>
                                     ) : (
-                                      <pre {...props} className="bg-gray-200 px-1 rounded">
-                                        <code>{children}</code>
+                                      <pre className="bg-gray-200 px-1 rounded">
+                                        <code {...rest} className={className}>{children}</code>
                                       </pre>
                                     );
                                   },
